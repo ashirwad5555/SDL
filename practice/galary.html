@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image Gallery</title>
+    <style>
+      body {
+        font-family: Arial;
+        text-align: center;
+      }
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 20px;
+      }
+      .gallery img {
+        width: 200px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 10px;
+        transition: transform 0.3s;
+      }
+      /*.gallery img:hover {
+        transform: scale(1.1);
+      }
+        */
+
+      #table th:hover {
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Simple Image Gallery</h2>
+    <div class="gallery">
+      <img src="D:\Academics\TY\SDL - 1\practice\ganapati_bappa.jpeg" />
+      <img src="D:\Academics\TY\SDL - 1\practice\ganapati_bappa.jpeg" />
+      <img src="D:\Academics\TY\SDL - 1\practice\ganapati_bappa.jpeg" />
+      <img src="D:\Academics\TY\SDL - 1\practice\ganapati_bappa.jpeg" />
+    </div>
+
+    <h2>My Sample Video</h2>
+
+    <video width="600" controls>
+      <source
+        src="D:\Academics\TY\SDL - 1\practice\SampleVideo_1280x720_1mb.mp4"
+      />
+      Your browser does not support the video tag.
+    </video>
+
+    <div class="tableDiv">
+      <table id="table">
+        <tr>
+          <th>hello</th>
+          <th>hi</th>
+          <th>namaste</th>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Facebook Registration</title>
+    <style>
+      .error-msg {
+        color: red;
+        font-size: 0.9em;
+        margin-top: 4px;
+        display: block;
+      }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("form");
+        form.addEventListener("submit", (event) => {
+          // Prevent form submission by default
+          event.preventDefault();
+          
+          // Run validation on all fields
+          const fields = [
+            "username",
+            "email",
+            "password",
+            "cnfpassword",
+            "phone",
+          ];
+          
+          let isValid = true;
+          
+          // Validate each field
+          fields.forEach((id) => {
+            const input = document.getElementById(id);
+            if (!validateField(input)) {
+              isValid = false;
+            }
+          });
+          
+          // Submit the form if all validations pass
+          if (isValid) {
+            form.submit();
+          }
+        });
+
+        function showError(input, message) {
+          const errorSpan = input.parentElement.querySelector(".error-msg");
+          errorSpan.textContent = message;
+        }
+
+        function clearError(input) {
+          const errorSpan = input.parentElement.querySelector(".error-msg");
+          errorSpan.textContent = "";
+        }
+
+        function validateField(input) {
+          const value = input.value.trim();
+          clearError(input);
+
+          if (!value) {
+            showError(input, `Please enter ${input.name}`);
+            return false;
+          }
+
+          if (input.id === "email" && !validateEmail(value)) {
+            showError(input, "Enter a valid email address");
+            return false;
+          }
+
+          if (input.id === "phone" && !validatePhone(value)) {
+            showError(input, "Phone number must be 10 to 15 digits");
+            return false;
+          }
+
+          if (input.id === "password" && !validatePassword(value)) {
+            showError(
+              input,
+              "Password must be 6+ characters with letters and numbers"
+            );
+            return false;
+          }
+
+          if (input.id === "cnfpassword") {
+            const password = document.getElementById("password").value.trim();
+            if (value !== password) {
+              showError(input, "Passwords do not match");
+              return false;
+            }
+          }
+
+          clearError(input);
+          return true;
+        }
+
+        function validateEmail(value) {
+          const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return re.test(value);
+        }
+
+        function validatePhone(value) {
+          const phoneRe = /^\d{10,15}$/;
+          return phoneRe.test(value);
+        }
+
+        function validatePassword(value) {
+          // const passRe = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+          const passRe = /^(?=.*[A-Za-z])(?=.*\d).{6,}$/;
+          return passRe.test(value);
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Facebook Registration Form</h1>
+    <form id="form" method="post">
+      <div class="username">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
+        <span class="error-msg"></span>
+      </div>
+      <div class="email">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" required />
+        <span class="error-msg"></span>
+      </div>
+      <div class="phone">
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" name="phone" />
+        <span class="error-msg"></span>
+      </div>
+      <div class="password">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+        <span class="error-msg"></span>
+      </div>
+      <div class="cnfpassword">
+        <label for="cnfpassword">Confirm Password</label>
+        <input type="password" id="cnfpassword" name="cnfpassword" required />
+        <span class="error-msg"></span>
+      </div>
+
+      <button id="button" type="submit">Register</button>
+    </form>
+  </body>
+</html>

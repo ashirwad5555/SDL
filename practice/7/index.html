@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AVG</title>
+  </head>
+  <body>
+    <h1>Welcome To world of JS</h1>
+    <button onclick="fn1()">Show time and Date</button>
+    <button onclick="fn2()">Show avg weeks</button>
+    <button onclick="fn3()">Show string eg</button>
+
+    <script>
+      alert("Welcome to JS");
+
+      function fn1() {
+        const hrs = new Date().getHours();
+
+        let timeOfDay;
+
+        if (hrs >= 6 && hrs < 12) {
+          timeOfDay = "Morning";
+        } else if (hrs >= 12 && hrs < 17) {
+          timeOfDay = "Afternoon";
+        } else {
+          timeOfDay = "Night";
+        }
+
+        alert(
+          "Presently " +
+            timeOfDay +
+            " " +
+            "and date is " +
+            new Date().toLocaleDateString()
+        );
+      }
+
+      function fn2() {
+        var noOfYears = 75;
+        var weekInYear = 55;
+
+        alert("Number of weeks " + noOfYears * weekInYear);
+      }
+      function fn3() {
+        let firstName = "Siddhesh";
+        let lastName = "More";
+        alert(firstName + " " + lastName);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      <!-- field level validation  -->
+
+      document.addEventListener("DOMContentLoaded", () => {
+        ["username", "email", "password", "cnfpassword", "phone"].forEach(
+          (id) => {
+            const input = document.getElementById(id);
+            input.addEventListener("blur", () => {
+              validateField(input);
+            });
+          }
+        );
+
+        function validateField(input) {
+          let value = input.value.trim();
+
+          if (!value) {
+            alert("Enter the form details");
+            return false;
+          }
+
+          if (input.id == "email" && !validateEmail(value)) {
+            alert("Enter valid email");
+            return false;
+          }
+          if (input.id == "phone" && !validatePhone(value)) {
+            alert("Enter valid phone");
+            return false;
+          }
+
+          if (input.id === "password" && !validatePassword(value)) {
+            alert(
+              "Password must be at least 6 characters long and contain both letters and numbers"
+            );
+            return false;
+          }
+        }
+
+        function validateEmail(value) {
+          const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return re.test(value);
+        }
+
+        function validatePhone(value) {
+          const phoneRe = /^\d{10,15}$/;
+          return phoneRe.test(value);
+        }
+
+        function validatePassword(value) {
+          const passRe = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+          return passRe.test(value);
+        }
+
+        return true;
+      });
+
+      // <!-- form level i.e. submit level validation -->
+      /* document.addEventListener("DOMContentLoaded", () => {
+        var button = document.getElementById("button");
+        button.addEventListener("click", (e) => {
+          e.preventDefault();
+          validateForm();
+        });
+
+         function validateForm() {
+          let username = document.getElementById("username").value;
+          let email = document.getElementById("email").value;
+          let password = document.getElementById("password").value;
+          let cnfpassword = document.getElementById("cnfpassword").value;
+          let phone = document.getElementById("phone").value;
+
+          if (username === "") {
+            alert("Username is required");
+            return false;
+          }
+          if (password === "") {
+            alert("Password is required");
+            return false;
+          }
+          if (cnfpassword === "") {
+            alert("Confirm Password is required");
+            return false;
+          }
+          if (password !== cnfpassword) {
+            alert("Passwords do not match");
+            return false;
+          }
+
+          const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          const phoneRe = /^\d{10,15}$/;
+
+          if (!re.test(email)) {
+            alert("Enter a valid Email");
+            return false;
+          }
+
+          if (!phoneRe.test(phone)) {
+            alert("Enter the valid phone number");
+            return false;
+          }
+
+          alert("Form submitted successfully!");
+        }
+      }); */
+    </script>
+  </head>
+  <body>
+    <h1>Facebook Registration form</h1>
+    <form id="form" method="post">
+      <div class="username">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
+      </div>
+      <div class="email">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" required />
+      </div>
+      <div class="phone">
+        <label for="phone">phone</label>
+        <input type="text" id="phone" name="phone" />
+      </div>
+      <div class="password">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+      <div class="cnfpassword">
+        <label for="cnfpassword">Confirm Password</label>
+        <input type="password" id="cnfpassword" name="cnfpassword" required />
+      </div>
+
+      <button id="button" type="submit">Register</button>
+    </form>
+  </body>
+</html>

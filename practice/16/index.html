@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <link rel="stylesheet" href="styles.css" />
+  <body>
+    <h1>Registration form</h1>
+    <form id="registrationForm">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" required />
+        <span class="error" id="firstNameError"></span>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" required />
+        <span class="error" id="lastNameError"></span>
+      </div>
+      <div class="form-group">
+        <label for="organisation">organisation</label>
+        <input type="text" id="organisation" name="organisation" required />
+        <span class="error" id="organisationError"></span>
+      </div>
+      <div class="form-group">
+        <label for="hobbies">hobbies</label>
+        <select name="hobbies" id="hobbies" multiple>
+          <option value="drawing">drawing</option>
+          <option value="running">running</option>
+          <option value="dancing">dancing</option>
+        </select>
+        <span class="error" id="hobbiesError"></span>
+      </div>
+      <div class="form-group">
+        <button type="submit">Register</button>
+      </div>
+    </form>
+
+    <div id="displayDetails" class="display-details" style="display: none">
+      <p><strong>First name :</strong> <span id="displayfirstName"></span></p>
+      <p><strong>Last name :</strong> <span id="displaylastName"></span></p>
+      <p>
+        <strong>organisation :</strong> <span id="displayorganisation"></span>
+      </p>
+      <p><strong>Hobbies :</strong> <span id="displayHobbies"></span></p>
+      <p><button id="editBtn">edit</button></p>
+    </div>
+    <script>
+      const form = document.getElementById("registrationForm");
+      const displaySection = document.getElementById("displayDetails");
+      const editBtn = document.getElementById("editBtn");
+
+      document.addEventListener("DOMContentLoaded", () => {
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const first_name = form.firstName.value.trim();
+          const last_name = form.lastName.value.trim();
+          const organisation = form.organisation.value.trim();
+          const hobbies = Array.from(form.hobbies.selectedOptions).map(
+            (h) => h.text
+          );
+
+          //validation
+          let valid = true;
+
+          if (first_name === "") {
+            document.getElementById("firstNameError").innerHTML =
+              "first Name is requred";
+            valid = false;
+          }
+          if (last_name === "") {
+            document.getElementById("lastNameError").innerHTML =
+              "last Name is requred";
+            valid = false;
+          }
+          if (organisation === "") {
+            document.getElementById("organisationError").innerHTML =
+              "organisation is requred";
+            valid = false;
+          }
+
+          if (!valid) {
+            return;
+          }
+
+          //display details section
+          document.getElementById("displayfirstName").innerText = first_name;
+          document.getElementById("displaylastName").innerText = last_name;
+          document.getElementById("displayorganisation").innerText =
+            organisation;
+          document.getElementById("displayHobbies").innerText =
+            hobbies.join(", ");
+
+          form.style.display = "none";
+          displaySection.style.display = "block";
+        });
+      });
+
+      //edit button
+      editBtn.addEventListener("click", () => {
+        form.style.display = "block";
+        displaySection.style.display = "none";
+      });
+    </script>
+  </body>
+</html>

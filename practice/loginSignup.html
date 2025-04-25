@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Signup & Login</title>
+  </head>
+  <body>
+    <h2>Sign Up</h2>
+    <form id="signupForm">
+      Name: <input type="text" id="name" /><br /><br />
+      Username: <input type="text" id="signupUsername" /><br /><br />
+      Password: <input type="password" id="signupPassword" /><br /><br />
+      <button type="button" onclick="signUp()">Sign Up</button>
+    </form>
+
+    <h2>Login</h2>
+    <form id="loginForm">
+      Username: <input type="text" id="loginUsername" /><br /><br />
+      Password: <input type="password" id="loginPassword" /><br /><br />
+      <button type="button" onclick="login()">Login</button>
+    </form>
+
+    <h3 id="welcome"></h3>
+
+    <script>
+      let storedUser = {};
+
+      function signUp() {
+        let name = document.getElementById("name").value;
+        let username = document.getElementById("signupUsername").value;
+        let password = document.getElementById("signupPassword").value;
+
+        if (name === "" || username === "" || password === "") {
+          alert("All fields are required!");
+          return;
+        }
+
+        storedUser = { name: name, username: username, password: password };
+        alert("Sign up successful!");
+      }
+
+      function login() {
+        let uname = document.getElementById("loginUsername").value;
+        let pass = document.getElementById("loginPassword").value;
+
+        if (uname === "" || pass === "") {
+          alert("Enter username and password!");
+          return;
+        }
+
+        if (uname === storedUser.username && pass === storedUser.password) {
+          document.getElementById("welcome").innerText =
+            "Welcome, " + storedUser.name + "!";
+        } else {
+          alert("Invalid login!");
+        }
+      }
+    </script>
+  </body>
+</html>
